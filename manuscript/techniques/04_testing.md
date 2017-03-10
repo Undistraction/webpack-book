@@ -4,7 +4,9 @@ Testing is a vital part of development. Even though techniques, such as linting,
 
 You can **unit test** specific piece of code, or you can look at the application from the user's point of view through **acceptance testing**. **Integration testing** fits between these ends of the spectrum and is concerned about how separate units of code operate together.
 
-You can find a lot of testing tools for JavaScript. The most popular options work with webpack after you configure it right. Even though test runners work without webpack, running them through it allows you to process code the test runners do not understand while having control over the way modules are resolved. You can also use webpack's watch mode instead of relying on one provided by a test runner.
+You can find a lot of testing tools for JavaScript. The most popular options work with webpack after you configure it correctly. Even though test runners work without webpack, running them through it allows you to process code the test runners do not understand while having control over the way modules are resolved. For example, your code might import images or styles, and while these imports make sense in the context of webpack because it knows how to process them, testing the same code outside of webpack might result in errors when these imports are encountered. By testing through webpack you can ensure these imports are understood. However, in most cases, these imports are irrelevant to your tests, so alternatively you can treat these imports differently, either ignoring them or returning known objects in their stead. Webpack can help with this, but it is also possible to use babel for this purpose.
+
+You can also use webpack's watch mode instead of relying on one provided by a test runner.
 
 ## Mocha
 
@@ -430,7 +432,7 @@ The main idea is to run both webpack and AVA in watch mode to push the problem o
 
 Mocking is a technique that allows you to replace test objects. Consider the solutions below:
 
-* [Sinon](https://www.npmjs.com/package/sinon) provides mocks, stubs, and spies. It's good to note that the `@next` version of Sinon has been designed webpack in mind. 1.x version of Sinon is more problematic and requires work as discussed in [webpack issue #304](https://github.com/webpack/webpack/issues/304).
+* [Sinon](https://www.npmjs.com/package/sinon) provides mocks, stubs, and spies. It's good to note that the `@next` version of Sinon has been designed with webpack in mind. The 1.x versions of Sinon are more problematic and require work as discussed in [webpack issue #304](https://github.com/webpack/webpack/issues/304).
 * [inject-loader](https://www.npmjs.com/package/inject-loader) allows you to inject code to modules through their dependencies making it valuable for mocking.
 * [rewire-webpack](https://www.npmjs.com/package/rewire-webpack) allows mocking and overriding module globals. [babel-plugin-rewire](https://www.npmjs.com/package/babel-plugin-rewire) implements [rewire](https://www.npmjs.com/package/rewire) for Babel.
 
@@ -444,4 +446,4 @@ To recap:
 * Sometimes the test setup can be quite involved. Tools like Jest remove most of the boilerplate and allow you to develop tests with minimal setup.
 * You can find multiple mocking tools for webpack. They allow you to shape test environment. Sometimes you can avoid mocking through design, though.
 
-You learn to deploy applications using webpack in the next chapter.
+In the next chapter you learn to deploy applications using webpack.
